@@ -1,0 +1,18 @@
+name: model-wine-quality
+on: [push]
+jobs:
+  run:
+    run-on: [ubuntu-latest]
+    container
+      - uses: action/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run:
+        
+          # Your ML workflow goes here
+          pip install -r requirements.txt
+          python train.py
+          
+          echo "MODEL METRIC"
+          cat metrices.txt
